@@ -29,7 +29,8 @@ app.post('/api/send-email', async (req, res) => {
     const { email, message } = req.body;
     try {
         await transporter.sendMail({
-            from: email,
+            from: process.env.MY_ADDRESS,
+            replyTo:email,
             to: process.env.MY_ADDRESS,
             subject: 'メールフォームからのメッセージ',
             text: message,
