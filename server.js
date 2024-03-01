@@ -35,6 +35,12 @@ app.post('/api/send-email', async (req, res) => {
             subject: 'メールフォームからのメッセージ',
             text: message,
         });
+        await transporter.sendMail({
+            from: process.env.MY_ADDRESS,
+            to: email,
+            subject: '返信メッセージ',
+            text: '連絡ありがとうございます。なるべく早いうちにご連絡させていただきます。',
+        });
         res.status(200).json({message: 'メールを送信しました'});
     } catch (error) {
         console.error('メール送信エラー', error);
